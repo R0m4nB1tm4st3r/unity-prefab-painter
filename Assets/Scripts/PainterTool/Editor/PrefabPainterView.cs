@@ -10,4 +10,11 @@ public class PrefabPainterView : EditorWindow
     {
         GetWindow<PrefabPainterView>();
     }
+
+    private void DrawView()
+    {
+        
+    }
 }
+
+
