@@ -1,19 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEditor;
-using UnityEngine;
 
-public class PrefabPainterView : EditorWindow
+namespace PainterTool.Editor
 {
-    [MenuItem("/Tools/Prefab Painter")]
-    private static void ShowWindow()
+    public class PrefabPainterView : EditorWindow
     {
-        GetWindow<PrefabPainterView>();
-    }
+        [MenuItem("/Tools/Prefab Painter")]
+        private static void ShowWindow()
+        {
+            GetWindow<PrefabPainterView>();
+            DrawView();
+        }
 
-    private void DrawView()
-    {
+        private static void DrawView()
+        {
         
+        }
     }
 }
 
