@@ -11,6 +11,7 @@ namespace PainterTool
         public Vector3 ScaleFactor { get; set; } = Vector3.one;
         public LayerMask TargetLayers { get; set; } = new ();
         public EPainterMode Mode { get; set; } = EPainterMode.Standard;
+        public GameObject SinglePrefab { get; set; } = null;
         public List<GameObject> Prefabs { get; } = new ();
     }
 }
