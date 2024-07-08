@@ -20,6 +20,7 @@ namespace PainterTool.Editor
         private const string SetPrefabListLabel = "Add/Remove Prefabs";
         private const string RemovePrefabLabel = "Remove";
         private const string AddPrefabLabel = "Add";
+        private const string CouldNotRemovePrefabErrorMessage = "Could not remove Prefab for some reason!";
         private static readonly Func<bool, string> TogglePainterLabel =
             (isPainterOn) => $"{(isPainterOn ? "Dea" : "A")}ctivate Painter";
 
@@ -84,14 +85,19 @@ namespace PainterTool.Editor
                             (GameObject)EditorGUILayout.ObjectField(model.Prefabs[i], typeof(GameObject));
                         if (GUILayout.Button(RemovePrefabLabel))
                         {
-                            // remove Prefab
+                            var hasBeenRemoved = viewModel.RemovePrefabFromList(model.Prefabs[i]);
+
+                            if (!hasBeenRemoved)
+                            {
+                                Debug.LogError(CouldNotRemovePrefabErrorMessage);
+                            }
                         }
                         EditorGUILayout.EndHorizontal();
                     }
 
                     if (GUILayout.Button(AddPrefabLabel))
                     {
-                        // add Prefab
+                        viewModel.AddPrefabToList();
                     }
                 }, SetPrefabListLabel);
             }
