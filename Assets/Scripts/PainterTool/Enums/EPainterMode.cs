@@ -1,6 +1,6 @@
 namespace PainterTool.Enums
 {
-    public enum EPainterMode
+    public enum EPainterMode: byte
     {
         Standard, Brush, Fill
     }
