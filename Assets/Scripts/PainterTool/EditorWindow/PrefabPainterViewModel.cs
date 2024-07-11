@@ -1,6 +1,7 @@
+using UnityEditor;
 using UnityEngine;
 
-namespace PainterTool
+namespace PainterTool.EditorWindow
 {
     public class PrefabPainterViewModel
     {
