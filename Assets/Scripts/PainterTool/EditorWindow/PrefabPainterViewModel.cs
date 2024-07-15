@@ -57,6 +57,7 @@ namespace PainterTool.EditorWindow
                 case PrefabAssetType.MissingAsset:
                     var obj = Object.Instantiate(Model.SinglePrefab, painterInfo.point, Quaternion.identity);
                     obj.transform.up = painterInfo.normal;
+                    obj.transform.localScale = Model.ScaleFactor;
                     return;
                 case PrefabAssetType.Regular:
                 case PrefabAssetType.Model:
@@ -64,6 +65,7 @@ namespace PainterTool.EditorWindow
                     var prefObj = (GameObject)PrefabUtility.InstantiatePrefab(Model.SinglePrefab);
                     prefObj.transform.position = painterInfo.point;
                     prefObj.transform.up = painterInfo.normal;
+                    prefObj.transform.localScale = Model.ScaleFactor;
                     return;
                 default:
                     throw new ArgumentOutOfRangeException();
