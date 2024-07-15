@@ -68,7 +68,7 @@ namespace PainterTool.EditorWindow.Editor
                 var ray = HandleUtility.GUIPointToWorldRay(Event.current.mousePosition);
 
                 // if no hit from Raycast, return
-                if (!Physics.Raycast(ray, out painterRaycastHit)) return;
+                if (!Physics.Raycast(ray, out painterRaycastHit, float.MaxValue, 1 << model.TargetLayers)) return;
             
                 // else draw circle on hit position
                 switch (model.Mode)
@@ -84,6 +84,20 @@ namespace PainterTool.EditorWindow.Editor
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();
+                }
+
+                if (Event.current.type == EventType.MouseDown)
+                {
+                    Debug.Log(Event.current.button);
+                    switch (Event.current.button)
+                    {
+                        case 0:         // Left Button
+                            ViewModel.Paint(painterRaycastHit);
+                            break;
+                        case 1:         // Right Button
+                        case 2:         // Middle Button
+                            break;
+                    }
                 }
             }
         }
@@ -111,7 +125,7 @@ namespace PainterTool.EditorWindow.Editor
             EmbedSettingGUI(() => model.ScaleFactor = EditorGUILayout.Vector3Field("", model.ScaleFactor), SetScaleFactorLabel);
 
             // set target Layer(s)
-            EmbedSettingGUI(() => model.TargetLayers = EditorGUILayout.LayerField(model.TargetLayers), SetTargetLayerLabel);
+            EmbedSettingGUI(() => model.TargetLayers = EditorGUILayout.LayerField(model.TargetLayers.value), SetTargetLayerLabel);
             
             // select single Prefab in Standard Mode or add/remove multiple Prefabs
             if (model.Mode == EPainterMode.Standard)
